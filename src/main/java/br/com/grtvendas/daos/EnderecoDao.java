@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 import br.com.grtvendas.models.Endereco;
 
@@ -11,7 +12,8 @@ public class EnderecoDao {
 
 	@PersistenceContext
 	private EntityManager manager;
-
+	
+	@Transactional
 	public void cadastrar(Endereco endereco) {
 		manager.persist(endereco);
 	}

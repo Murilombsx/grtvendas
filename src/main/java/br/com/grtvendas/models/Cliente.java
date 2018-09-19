@@ -38,6 +38,23 @@ public class Cliente {
 
 	@ManyToOne
 	private Representante representante;
+	
+	public Cliente() {}
+
+	public Cliente(String nomeFantasia, String razaoSocial, String cnpj, String inscricaoEstadual, String pessoaContato,
+			String email, String telefone, Endereco endereco, Representante representante, List<Pedido> pedidos) {
+		super();
+		this.nomeFantasia = nomeFantasia;
+		this.razaoSocial = razaoSocial;
+		this.cnpj = cnpj;
+		this.inscricaoEstadual = inscricaoEstadual;
+		this.pessoaContato = pessoaContato;
+		this.email = email;
+		this.telefone = telefone;
+		this.endereco = endereco;
+		this.representante = representante;
+		this.pedidos = pedidos;
+	}
 
 	public List<Pedido> getPedidos() {
 		return pedidos;

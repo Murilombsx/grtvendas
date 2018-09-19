@@ -13,25 +13,27 @@ import javax.ws.rs.core.MediaType;
 import br.com.grtvendas.gerenciador.EnderecoGerenciador;
 import br.com.grtvendas.models.Endereco;
 
-@Path("/enderecos")
+@Path("/endereco")
 @RequestScoped
 public class EnderecoService {
 
 	@Inject
 	private EnderecoGerenciador enderecoGerenciador;
 	
+	// FUNCIONANDO OK
 	@GET
 	@Path("/descricao/{idEndereco}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Endereco descricao(@PathParam("idEndereco") Integer idEndereco) {
 		return enderecoGerenciador.buscaPorId(idEndereco);
 	}
-	
+
+	// FUNCIONANDO OK
 	@GET
-	@Path("/lista")
+	@Path("/listar")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Endereco> descricao() {
 		return enderecoGerenciador.todosEnderecos();
 	}
-	
+
 }

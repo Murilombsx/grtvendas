@@ -28,15 +28,15 @@ public class Representante {
 	private Calendar dataEntrada;
 	private String razaoSocial;
 	private String cnpj;
-	
-	@JoinColumn(unique=true)
+
+	@JoinColumn(unique = true)
 	@OneToOne
 	private Endereco endereco;
 
-	@OneToMany(mappedBy="representante")
+	@OneToMany(mappedBy = "representante")
 	private List<Pedido> pedidos = new ArrayList<>();
 
-	@OneToMany(mappedBy="representante")
+	@OneToMany(mappedBy = "representante")
 	private List<Cliente> clientes = new ArrayList<>();
 
 	public Representante() {
