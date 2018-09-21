@@ -3,6 +3,7 @@ package br.com.grtvendas.daos;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import br.com.grtvendas.models.Cliente;
@@ -21,8 +22,18 @@ public class ClienteDao {
 	}
 
 	public Cliente buscaPorId(int id) {
-		return manager.createQuery("select c from Cliente c join fetch c.pedidos where c.id = :id", Cliente.class)
+		try {
+			return manager.createQuery("select c from Cliente c join fetch c.pedidos where c.id = :id", Cliente.class)
 				.setParameter("id", id).getSingleResult();
+		} catch(NoResultException e) {
+			return manager.createQuery("select c from Cliente c where c.id = :id", Cliente.class)
+					.setParameter("id", id).getSingleResult();
+		}
+	}
+
+	public void remove(Cliente cliente) {
+		manager.remove(cliente);
+		
 	}
 
 }

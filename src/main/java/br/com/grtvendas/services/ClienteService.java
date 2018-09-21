@@ -6,19 +6,20 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import br.com.grtvendas.dtos.ClienteDTO;
 import br.com.grtvendas.dtos.ClienteDTOResposta;
 import br.com.grtvendas.dtos.ClienteResumoDTOResposta;
 import br.com.grtvendas.gerenciador.ClienteGerenciador;
 import br.com.grtvendas.models.Cliente;
-import br.com.grtvendas.models.Pedido;
 
 @Path("/clientes")
 @RequestScoped
@@ -27,7 +28,8 @@ public class ClienteService {
 	@Inject
 	private ClienteGerenciador clienteGerenciador;
 
-	// Até o momento, onde foi testado, cumpriu sua função de cadastrar um cliente com eficiencia
+	// Até o momento, onde foi testado, cumpriu sua função de cadastrar um cliente
+	// com eficiencia
 	@POST
 	@Path("/cadastrar")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -35,10 +37,22 @@ public class ClienteService {
 	public ClienteDTOResposta cadastrar(ClienteDTO clienteDTO) {
 		Cliente clienteOriginalAuxiliar = clienteGerenciador.cadastrar(clienteDTO.transformaParaObjeto());
 		ClienteDTOResposta cliente = new ClienteDTOResposta().transformaEmDTO(clienteOriginalAuxiliar);
-		
+
 		return cliente;
 	}
 	
+	// Com mesmo problema do detalhe, quando nao o cliente nao se tem pedidos, nao estou conseguindo acessar ele
+	// sem dar not found query ou lazy initializate
+	@GET
+	@Path("/deletar/{idCliente}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response deletar(@PathParam("idCliente") Integer idCliente) {
+		Cliente cliente = clienteGerenciador.buscaPorId(idCliente);
+		clienteGerenciador.remove(cliente);
+		
+		return Response.status(Response.Status.OK).entity("Cliente " + cliente.getCnpj() + " deletado com sucesso!").build();
+	}
+
 	// Funcionando ok
 	@GET
 	@Path("/listar")
@@ -50,19 +64,19 @@ public class ClienteService {
 			ClienteResumoDTOResposta cliente = new ClienteResumoDTOResposta().transformaEmDTO(clienteOriginalAuxiliar);
 			clientes.add(cliente);
 		}
-		
+
 		return clientes;
 	}
-	
+
 	// Ainda não está funcionando
-	/*@GET
+	@GET
 	@Path("/detalhe/{idCliente}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ClienteDTOResposta detalhe(@PathParam("idCliente") Integer idCliente) {
 		Cliente clienteOriginalAuxiliar = clienteGerenciador.buscaPorId(idCliente);
 		ClienteDTOResposta cliente = new ClienteDTOResposta().transformaEmDTO(clienteOriginalAuxiliar);
-		
+
 		return cliente;
-	}*/
+	}
 
 }

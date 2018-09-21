@@ -18,12 +18,11 @@ public class ClienteDTO {
 	private String telefone;
 	private EnderecoDTO endereco;
 	private Representante representante;
-	private List<Pedido> pedidos;
 
 	public Cliente transformaParaObjeto() {
 		Endereco endereco = this.endereco.transformaParaObjeto();
 		return new Cliente(nomeFantasia, razaoSocial, cnpj, inscricaoEstadual, pessoaContato, email, telefone, endereco,
-				representante, pedidos);
+				representante);
 	}
 
 	public EnderecoDTO getEndereco() {
@@ -96,14 +95,6 @@ public class ClienteDTO {
 
 	public void setRepresentante(Representante representante) {
 		this.representante = representante;
-	}
-
-	public List<Pedido> getPedidos() {
-		return pedidos;
-	}
-
-	public void setPedidos(List<Pedido> pedidos) {
-		this.pedidos = pedidos;
 	}
 
 }

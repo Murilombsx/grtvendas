@@ -42,8 +42,7 @@ public class Cliente {
 	public Cliente() {}
 
 	public Cliente(String nomeFantasia, String razaoSocial, String cnpj, String inscricaoEstadual, String pessoaContato,
-			String email, String telefone, Endereco endereco, Representante representante, List<Pedido> pedidos) {
-		super();
+			String email, String telefone, Endereco endereco, Representante representante) {
 		this.nomeFantasia = nomeFantasia;
 		this.razaoSocial = razaoSocial;
 		this.cnpj = cnpj;
@@ -53,7 +52,6 @@ public class Cliente {
 		this.telefone = telefone;
 		this.endereco = endereco;
 		this.representante = representante;
-		this.pedidos = pedidos;
 	}
 
 	public List<Pedido> getPedidos() {

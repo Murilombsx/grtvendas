@@ -1,10 +1,12 @@
 package br.com.grtvendas.dtos;
 
 import br.com.grtvendas.models.Cliente;
+import br.com.grtvendas.models.Representante;
 
 /*
 	Classe de visualização de Cliente resumida, que mostra:
 		- id, nome fantasia, razão social e cnpj
+		- id e nome do representante
 */
 
 public class ClienteResumoDTOResposta {
@@ -13,21 +15,27 @@ public class ClienteResumoDTOResposta {
 	private String nomeFantasia;
 	private String razaoSocial;
 	private String cnpj;
+	private RepresentanteResumoDTOResposta representante;
 
 	public ClienteResumoDTOResposta() {
 	}
 
-	public ClienteResumoDTOResposta(Integer id, String nomeFantasia, String razaoSocial, String cnpj) {
+	public ClienteResumoDTOResposta(Integer id, String nomeFantasia, String razaoSocial, String cnpj,
+			RepresentanteResumoDTOResposta representante) {
 		this.id = id;
 		this.nomeFantasia = nomeFantasia;
 		this.razaoSocial = razaoSocial;
 		this.cnpj = cnpj;
+		this.representante = representante;
 	}
 
 	public ClienteResumoDTOResposta transformaEmDTO(Cliente cliente) {
+		Representante representanteOriginalAuxiliar = cliente.getRepresentante();
+		RepresentanteResumoDTOResposta representante = new RepresentanteResumoDTOResposta()
+				.transformaEmDTO(representanteOriginalAuxiliar);
 
 		return new ClienteResumoDTOResposta(cliente.getId(), cliente.getNomeFantasia(), cliente.getRazaoSocial(),
-				cliente.getCnpj());
+				cliente.getCnpj(), representante);
 	}
 
 	public Integer getId() {
@@ -60,6 +68,14 @@ public class ClienteResumoDTOResposta {
 
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
+	}
+
+	public RepresentanteResumoDTOResposta getRepresentante() {
+		return representante;
+	}
+
+	public void setRepresentante(RepresentanteResumoDTOResposta representante) {
+		this.representante = representante;
 	}
 
 }
