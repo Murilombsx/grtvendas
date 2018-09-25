@@ -12,8 +12,7 @@ public class RepresentanteResumoDTOResposta {
 	private Integer id;
 	private String nome;
 
-	public RepresentanteResumoDTOResposta() {
-	}
+	public RepresentanteResumoDTOResposta() {}
 
 	public RepresentanteResumoDTOResposta(Integer id, String nome) {
 		this.id = id;

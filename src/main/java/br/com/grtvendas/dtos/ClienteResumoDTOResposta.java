@@ -17,8 +17,7 @@ public class ClienteResumoDTOResposta {
 	private String cnpj;
 	private RepresentanteResumoDTOResposta representante;
 
-	public ClienteResumoDTOResposta() {
-	}
+	public ClienteResumoDTOResposta() {}
 
 	public ClienteResumoDTOResposta(Integer id, String nomeFantasia, String razaoSocial, String cnpj,
 			RepresentanteResumoDTOResposta representante) {

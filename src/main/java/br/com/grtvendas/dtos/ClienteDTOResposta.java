@@ -55,6 +55,7 @@ public class ClienteDTOResposta {
 
 		List<PedidoResumoDTOResposta> pedidos = new ArrayList<>();
 		List<Pedido> pedidosOriginalAuxiliar = cliente.getPedidos();
+
 		for (Pedido pedidoOriginalAuxiliar : pedidosOriginalAuxiliar) {
 			PedidoResumoDTOResposta pedido = new PedidoResumoDTOResposta().transformaEmDTO(pedidoOriginalAuxiliar);
 			pedidos.add(pedido);

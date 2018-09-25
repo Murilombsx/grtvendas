@@ -12,8 +12,7 @@ public class PedidoResumoDTOResposta {
 	private Integer id;
 	private int numero;
 
-	public PedidoResumoDTOResposta() {
-	}
+	public PedidoResumoDTOResposta() {}
 
 	public PedidoResumoDTOResposta(Integer id, int numero) {
 		this.id = id;

@@ -6,7 +6,6 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -28,8 +27,7 @@ public class ClienteService {
 	@Inject
 	private ClienteGerenciador clienteGerenciador;
 
-	// Até o momento, onde foi testado, cumpriu sua função de cadastrar um cliente
-	// com eficiencia
+	// Funcionando ok
 	@POST
 	@Path("/cadastrar")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -39,18 +37,6 @@ public class ClienteService {
 		ClienteDTOResposta cliente = new ClienteDTOResposta().transformaEmDTO(clienteOriginalAuxiliar);
 
 		return cliente;
-	}
-	
-	// Com mesmo problema do detalhe, quando nao o cliente nao se tem pedidos, nao estou conseguindo acessar ele
-	// sem dar not found query ou lazy initializate
-	@GET
-	@Path("/deletar/{idCliente}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response deletar(@PathParam("idCliente") Integer idCliente) {
-		Cliente cliente = clienteGerenciador.buscaPorId(idCliente);
-		clienteGerenciador.remove(cliente);
-		
-		return Response.status(Response.Status.OK).entity("Cliente " + cliente.getCnpj() + " deletado com sucesso!").build();
 	}
 
 	// Funcionando ok
@@ -68,7 +54,7 @@ public class ClienteService {
 		return clientes;
 	}
 
-	// Ainda não está funcionando
+	// Funcionando ok
 	@GET
 	@Path("/detalhe/{idCliente}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -79,4 +65,15 @@ public class ClienteService {
 		return cliente;
 	}
 
+	// Funcionando ok
+	@GET
+	@Path("/deletar/{idCliente}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response deletar(@PathParam("idCliente") Integer idCliente) {
+		Cliente cliente = clienteGerenciador.buscaPorId(idCliente);
+		clienteGerenciador.remove(cliente);
+
+		return Response.status(Response.Status.OK).entity("Cliente " + cliente.getCnpj() + " deletado com sucesso!")
+				.build();
+	}
 }

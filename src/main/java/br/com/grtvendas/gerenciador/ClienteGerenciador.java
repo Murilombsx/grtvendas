@@ -11,6 +11,7 @@ import br.com.grtvendas.daos.ClienteDao;
 import br.com.grtvendas.daos.EnderecoDao;
 import br.com.grtvendas.models.Cliente;
 import br.com.grtvendas.models.Endereco;
+import br.com.grtvendas.models.Pedido;
 
 public class ClienteGerenciador {
 
@@ -69,13 +70,13 @@ public class ClienteGerenciador {
 	
 	@Transactional
 	public void remove(Cliente cliente) {
-		if (cliente.getPedidos().get(0) != null) {
+		List<Pedido> pedidos = cliente.getPedidos();
+		if (!pedidos.isEmpty()) {
 			throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST)
 					.entity("Não é possível remover um cliente com pedidos cadastrados").build());
 		} else {
 			clienteDao.remove(cliente);
 		}
-
 	}
 
 }
