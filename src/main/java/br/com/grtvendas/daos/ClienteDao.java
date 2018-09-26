@@ -32,8 +32,13 @@ public class ClienteDao {
 	}
 
 	public void remove(Cliente cliente) {
-		Object c= manager.merge(cliente);
+		Object c = manager.merge(cliente);
 		manager.remove(c);
+	}
+
+	public void atualiza(Cliente cliente) {
+		manager.merge(cliente.getEndereco());
+		manager.merge(cliente);
 	}
 
 }

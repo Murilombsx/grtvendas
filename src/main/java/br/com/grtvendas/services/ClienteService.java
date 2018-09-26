@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 
 import br.com.grtvendas.dtos.ClienteDTO;
 import br.com.grtvendas.dtos.ClienteDTOResposta;
+import br.com.grtvendas.dtos.ClienteEditavelDTO;
 import br.com.grtvendas.dtos.ClienteResumoDTOResposta;
 import br.com.grtvendas.gerenciador.ClienteGerenciador;
 import br.com.grtvendas.models.Cliente;
@@ -28,6 +29,7 @@ public class ClienteService {
 	private ClienteGerenciador clienteGerenciador;
 
 	// Funcionando ok
+	// Cadastra um cliente
 	@POST
 	@Path("/cadastrar")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -40,6 +42,7 @@ public class ClienteService {
 	}
 
 	// Funcionando ok
+	// Lista todos clientes de forma resumida
 	@GET
 	@Path("/listar")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -55,6 +58,7 @@ public class ClienteService {
 	}
 
 	// Funcionando ok
+	// Detalha um cliente, com todas informações sobre ele, incluso endereço, representante e pedidos
 	@GET
 	@Path("/detalhe/{idCliente}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -66,6 +70,7 @@ public class ClienteService {
 	}
 
 	// Funcionando ok
+	// Pode deletar qualquer cliente através de seu id
 	@GET
 	@Path("/deletar/{idCliente}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -75,5 +80,20 @@ public class ClienteService {
 
 		return Response.status(Response.Status.OK).entity("Cliente " + cliente.getCnpj() + " deletado com sucesso!")
 				.build();
+	}
+	
+	// Funcionando ok
+	// Possibilita mudar algumas informacoes do cliente, incluso endereço e representante através de seu id
+	@POST
+	@Path("/editar/{idCliente}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public ClienteDTOResposta editar(ClienteEditavelDTO clienteEditavelDTO) {
+		Cliente clienteOriginal = clienteGerenciador.buscaPorId(clienteEditavelDTO.getId());
+		clienteGerenciador.atualiza(clienteOriginal, clienteEditavelDTO);
+		
+		ClienteDTOResposta cliente = new ClienteDTOResposta().transformaEmDTO(clienteOriginal);
+
+		return cliente;
 	}
 }

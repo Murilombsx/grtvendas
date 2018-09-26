@@ -1,10 +1,7 @@
 package br.com.grtvendas.dtos;
 
-import java.util.List;
-
 import br.com.grtvendas.models.Cliente;
 import br.com.grtvendas.models.Endereco;
-import br.com.grtvendas.models.Pedido;
 import br.com.grtvendas.models.Representante;
 
 public class ClienteDTO {

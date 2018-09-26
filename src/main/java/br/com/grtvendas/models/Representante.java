@@ -46,6 +46,11 @@ public class Representante {
 		this.id = id;
 	}
 
+	public Representante(Integer id, String nome) {
+		this.id = id;
+		this.nome = nome;
+	}
+
 	public Integer getId() {
 		return id;
 	}

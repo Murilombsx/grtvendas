@@ -54,6 +54,17 @@ public class Cliente {
 		this.representante = representante;
 	}
 
+	public Cliente(Integer id, String nomeFantasia, String pessoaContato, String email, String telefone,
+			Endereco endereco, Representante representante) {
+		this.id = id;
+		this.nomeFantasia = nomeFantasia;
+		this.pessoaContato = pessoaContato;
+		this.email = email;
+		this.telefone = telefone;
+		this.endereco = endereco;
+		this.representante = representante;
+	}
+
 	public List<Pedido> getPedidos() {
 		return pedidos;
 	}
