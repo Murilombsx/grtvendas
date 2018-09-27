@@ -29,4 +29,11 @@ public class RepresentanteDao {
 		}
 	}
 
+	public void remove(Representante representante) {
+		Object r = manager.merge(representante);
+		Object e = manager.merge(representante.getEndereco());
+		manager.remove(e);
+		manager.remove(r);
+	}
+
 }

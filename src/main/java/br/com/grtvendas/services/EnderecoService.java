@@ -13,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 import br.com.grtvendas.gerenciador.EnderecoGerenciador;
 import br.com.grtvendas.models.Endereco;
 
-@Path("/endereco")
+@Path("/enderecos")
 @RequestScoped
 public class EnderecoService {
 
@@ -22,7 +22,7 @@ public class EnderecoService {
 	
 	// FUNCIONANDO OK
 	@GET
-	@Path("/descricao/{idEndereco}")
+	@Path("/detalhe/{idEndereco}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Endereco descricao(@PathParam("idEndereco") Integer idEndereco) {
 		return enderecoGerenciador.buscaPorId(idEndereco);

@@ -10,6 +10,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import br.com.grtvendas.dtos.resposta.RepresentanteDTOResposta;
 import br.com.grtvendas.dtos.resposta.RepresentanteResumoDTOResposta;
@@ -39,7 +40,7 @@ public class RepresentanteService {
 
 		return representantes;
 	}
-	
+
 	// Funcionando ok
 	// Detalha um representante, com todas informações sobre ele, incluso endereço,
 	// clientes e pedidos
@@ -48,9 +49,23 @@ public class RepresentanteService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public RepresentanteDTOResposta detalhe(@PathParam("idRepresentante") Integer idRepresentante) {
 		Representante representanteOriginalAuxiliar = representanteGerenciador.buscaPorId(idRepresentante);
-		RepresentanteDTOResposta representante = new RepresentanteDTOResposta().transformaEmDTO(representanteOriginalAuxiliar);
+		RepresentanteDTOResposta representante = new RepresentanteDTOResposta()
+				.transformaEmDTO(representanteOriginalAuxiliar);
 
 		return representante;
+	}
+
+	// Funcionando ok
+	// Pode deletar um representante através de seu id
+	@GET
+	@Path("/deletar/{idRepresentante}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response deletar(@PathParam("idRepresentante") Integer idRepresentante) {
+		Representante representante = representanteGerenciador.buscaPorId(idRepresentante);
+		representanteGerenciador.remove(representante);
+
+		return Response.status(Response.Status.OK).entity("Representante " + representante.getNome() + " deletado com sucesso!")
+				.build();
 	}
 
 }

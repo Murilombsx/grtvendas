@@ -70,7 +70,7 @@ public class ClienteService {
 	}
 
 	// Funcionando ok
-	// Pode deletar qualquer cliente através de seu id
+	// Pode deletar um cliente através de seu id
 	@GET
 	@Path("/deletar/{idCliente}")
 	@Produces(MediaType.APPLICATION_JSON)

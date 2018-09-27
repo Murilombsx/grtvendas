@@ -33,6 +33,8 @@ public class ClienteDao {
 
 	public void remove(Cliente cliente) {
 		Object c = manager.merge(cliente);
+		Object e = manager.merge(cliente.getEndereco());
+		manager.remove(e);
 		manager.remove(c);
 	}
 
