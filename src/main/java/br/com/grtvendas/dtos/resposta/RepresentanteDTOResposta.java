@@ -28,14 +28,14 @@ public class RepresentanteDTOResposta {
 	private String cnpj;
 	private Endereco endereco;
 	private Set<ClienteResumoRefinadoDTOResposta> clientes = new HashSet<>();
-	private Set<PedidoResumoDTOResposta> pedidos = new HashSet<>();
+	private Set<PedidoResumoRefinadoDTOResposta> pedidos = new HashSet<>();
 
 	public RepresentanteDTOResposta() {
 	}
 
 	public RepresentanteDTOResposta(Integer id, String nome, String cpf, String rg, String email, Calendar dataEntrada,
 			String razaoSocial, String cnpj, Endereco endereco, Set<ClienteResumoRefinadoDTOResposta> clientes,
-			Set<PedidoResumoDTOResposta> pedidos) {
+			Set<PedidoResumoRefinadoDTOResposta> pedidos) {
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
@@ -58,10 +58,10 @@ public class RepresentanteDTOResposta {
 			clientes.add(cliente);
 		}
 
-		Set<PedidoResumoDTOResposta> pedidos = new HashSet<>();
+		Set<PedidoResumoRefinadoDTOResposta> pedidos = new HashSet<>();
 		Set<Pedido> pedidosOriginalAuxiliar = representante.getPedidos();
 		for (Pedido pedidoOriginalAuxiliar : pedidosOriginalAuxiliar) {
-			PedidoResumoDTOResposta pedido = new PedidoResumoDTOResposta().transformaEmDTO(pedidoOriginalAuxiliar);
+			PedidoResumoRefinadoDTOResposta pedido = new PedidoResumoRefinadoDTOResposta().transformaEmDTO(pedidoOriginalAuxiliar);
 			pedidos.add(pedido);
 		}
 
@@ -151,11 +151,11 @@ public class RepresentanteDTOResposta {
 		this.clientes = clientes;
 	}
 
-	public Set<PedidoResumoDTOResposta> getPedidos() {
+	public Set<PedidoResumoRefinadoDTOResposta> getPedidos() {
 		return pedidos;
 	}
 
-	public void setPedidos(Set<PedidoResumoDTOResposta> pedidos) {
+	public void setPedidos(Set<PedidoResumoRefinadoDTOResposta> pedidos) {
 		this.pedidos = pedidos;
 	}
 

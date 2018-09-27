@@ -27,14 +27,14 @@ public class ClienteDTOResposta {
 	private String telefone;
 	private Endereco endereco;
 	private RepresentanteResumoDTOResposta representante;
-	private List<PedidoResumoDTOResposta> pedidos = new ArrayList<>();
+	private List<PedidoResumoRefinadoDTOResposta> pedidos = new ArrayList<>();
 
 	public ClienteDTOResposta() {
 	}
 
 	public ClienteDTOResposta(Integer id, String nomeFantasia, String razaoSocial, String cnpj,
 			String inscricaoEstadual, String pessoaContato, String email, String telefone, Endereco endereco,
-			RepresentanteResumoDTOResposta representante, List<PedidoResumoDTOResposta> pedidos) {
+			RepresentanteResumoDTOResposta representante, List<PedidoResumoRefinadoDTOResposta> pedidos) {
 		this.id = id;
 		this.nomeFantasia = nomeFantasia;
 		this.razaoSocial = razaoSocial;
@@ -53,11 +53,11 @@ public class ClienteDTOResposta {
 		RepresentanteResumoDTOResposta representante = new RepresentanteResumoDTOResposta()
 				.transformaEmDTO(representanteOriginalAuxiliar);
 
-		List<PedidoResumoDTOResposta> pedidos = new ArrayList<>();
+		List<PedidoResumoRefinadoDTOResposta> pedidos = new ArrayList<>();
 		List<Pedido> pedidosOriginalAuxiliar = cliente.getPedidos();
 
 		for (Pedido pedidoOriginalAuxiliar : pedidosOriginalAuxiliar) {
-			PedidoResumoDTOResposta pedido = new PedidoResumoDTOResposta().transformaEmDTO(pedidoOriginalAuxiliar);
+			PedidoResumoRefinadoDTOResposta pedido = new PedidoResumoRefinadoDTOResposta().transformaEmDTO(pedidoOriginalAuxiliar);
 			pedidos.add(pedido);
 		}
 
@@ -146,11 +146,11 @@ public class ClienteDTOResposta {
 		this.representante = representante;
 	}
 
-	public List<PedidoResumoDTOResposta> getPedidos() {
+	public List<PedidoResumoRefinadoDTOResposta> getPedidos() {
 		return pedidos;
 	}
 
-	public void setPedidos(List<PedidoResumoDTOResposta> pedidos) {
+	public void setPedidos(List<PedidoResumoRefinadoDTOResposta> pedidos) {
 		this.pedidos = pedidos;
 	}
 
