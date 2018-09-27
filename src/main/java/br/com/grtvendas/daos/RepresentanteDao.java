@@ -36,4 +36,13 @@ public class RepresentanteDao {
 		manager.remove(r);
 	}
 
+	public void cadastrar(Representante representante) {
+		manager.persist(representante);
+	}
+
+	public void atualiza(Representante representante) {
+		manager.merge(representante.getEndereco());
+		manager.merge(representante);
+	}
+
 }

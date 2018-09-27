@@ -19,7 +19,7 @@ public class ClienteEditavelDTO {
 	private String email;
 	private String telefone;
 	private Endereco endereco;
-	private RepresentanteDTO representante;
+	private RepresentanteResumoDTO representante;
 
 	public Cliente transformaParaObjeto() {
 		Representante representante = this.representante.transformaParaObjeto();
@@ -74,11 +74,11 @@ public class ClienteEditavelDTO {
 		this.telefone = telefone;
 	}
 
-	public RepresentanteDTO getRepresentante() {
+	public RepresentanteResumoDTO getRepresentante() {
 		return representante;
 	}
 
-	public void setRepresentante(RepresentanteDTO representante) {
+	public void setRepresentante(RepresentanteResumoDTO representante) {
 		this.representante = representante;
 	}
 

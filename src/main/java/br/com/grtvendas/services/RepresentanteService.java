@@ -5,13 +5,17 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import br.com.grtvendas.dtos.entrada.RepresentanteDTO;
+import br.com.grtvendas.dtos.entrada.RepresentanteEditavelDTO;
 import br.com.grtvendas.dtos.resposta.RepresentanteDTOResposta;
 import br.com.grtvendas.dtos.resposta.RepresentanteResumoDTOResposta;
 import br.com.grtvendas.gerenciador.RepresentanteGerenciador;
@@ -64,8 +68,38 @@ public class RepresentanteService {
 		Representante representante = representanteGerenciador.buscaPorId(idRepresentante);
 		representanteGerenciador.remove(representante);
 
-		return Response.status(Response.Status.OK).entity("Representante " + representante.getNome() + " deletado com sucesso!")
-				.build();
+		return Response.status(Response.Status.OK)
+				.entity("Representante " + representante.getNome() + " deletado com sucesso!").build();
+	}
+
+	// Funcionando ok
+	// Cadastra um representante
+	@POST
+	@Path("/cadastrar")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public RepresentanteDTOResposta cadastrar(RepresentanteDTO representanteDTO) {
+		Representante representanteOriginalAuxiliar = representanteGerenciador
+				.cadastrar(representanteDTO.transformaParaObjeto());
+		RepresentanteDTOResposta representante = new RepresentanteDTOResposta()
+				.transformaEmDTO(representanteOriginalAuxiliar);
+
+		return representante;
+	}
+
+	// Funcionando ok
+	// Possibilita mudar algumas informacoes do representante, incluso endereço
+	@POST
+	@Path("/editar")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public RepresentanteDTOResposta editar(RepresentanteEditavelDTO representanteEditavelDTO) {
+		Representante representanteOriginal = representanteGerenciador.buscaPorId(representanteEditavelDTO.getId());
+		representanteGerenciador.atualiza(representanteOriginal, representanteEditavelDTO);
+
+		RepresentanteDTOResposta representante = new RepresentanteDTOResposta().transformaEmDTO(representanteOriginal);
+
+		return representante;
 	}
 
 }

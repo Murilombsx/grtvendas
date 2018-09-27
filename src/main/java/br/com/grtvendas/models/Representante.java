@@ -28,6 +28,7 @@ public class Representante {
 	private Calendar dataEntrada;
 	private String razaoSocial;
 	private String cnpj;
+	private String telefone;
 
 	@JoinColumn(unique = true)
 	@OneToOne
@@ -49,6 +50,34 @@ public class Representante {
 	public Representante(Integer id, String nome) {
 		this.id = id;
 		this.nome = nome;
+	}
+
+	public Representante(String nome, String razaoSocial, String cnpj, String cpf, String rg, String email, Calendar dataEntrada,
+			String telefone, Endereco endereco) {
+		this.nome = nome;
+		this.razaoSocial = razaoSocial;
+		this.cnpj = cnpj;
+		this.cpf = cpf;
+		this.rg = rg;
+		this.email = email;
+		this.dataEntrada = dataEntrada;
+		this.telefone = telefone;
+		this.endereco = endereco;
+	}
+
+	public Representante(Integer id, String email, String telefone, Endereco endereco) {
+		this.id = id;
+		this.email = email;
+		this.telefone = telefone;
+		this.endereco = endereco;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
 	public Integer getId() {
