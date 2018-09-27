@@ -9,7 +9,7 @@ import javax.ws.rs.core.Response;
 
 import br.com.grtvendas.daos.ClienteDao;
 import br.com.grtvendas.daos.EnderecoDao;
-import br.com.grtvendas.dtos.ClienteEditavelDTO;
+import br.com.grtvendas.dtos.entrada.ClienteEditavelDTO;
 import br.com.grtvendas.models.Cliente;
 import br.com.grtvendas.models.Endereco;
 import br.com.grtvendas.models.Pedido;

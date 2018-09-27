@@ -14,10 +14,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import br.com.grtvendas.dtos.ClienteDTO;
-import br.com.grtvendas.dtos.ClienteDTOResposta;
-import br.com.grtvendas.dtos.ClienteEditavelDTO;
-import br.com.grtvendas.dtos.ClienteResumoDTOResposta;
+import br.com.grtvendas.dtos.entrada.ClienteDTO;
+import br.com.grtvendas.dtos.entrada.ClienteEditavelDTO;
+import br.com.grtvendas.dtos.resposta.ClienteDTOResposta;
+import br.com.grtvendas.dtos.resposta.ClienteResumoDTOResposta;
 import br.com.grtvendas.gerenciador.ClienteGerenciador;
 import br.com.grtvendas.models.Cliente;
 
@@ -85,7 +85,7 @@ public class ClienteService {
 	// Funcionando ok
 	// Possibilita mudar algumas informacoes do cliente, incluso endereço e representante através de seu id
 	@POST
-	@Path("/editar/{idCliente}")
+	@Path("/editar")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public ClienteDTOResposta editar(ClienteEditavelDTO clienteEditavelDTO) {

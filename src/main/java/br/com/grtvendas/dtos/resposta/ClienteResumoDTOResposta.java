@@ -1,4 +1,4 @@
-package br.com.grtvendas.dtos;
+package br.com.grtvendas.dtos.resposta;
 
 import br.com.grtvendas.models.Cliente;
 import br.com.grtvendas.models.Representante;

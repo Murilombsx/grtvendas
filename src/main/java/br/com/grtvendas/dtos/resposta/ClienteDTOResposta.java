@@ -1,4 +1,4 @@
-package br.com.grtvendas.dtos;
+package br.com.grtvendas.dtos.resposta;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,8 +1,8 @@
 package br.com.grtvendas.models;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,10 +34,10 @@ public class Representante {
 	private Endereco endereco;
 
 	@OneToMany(mappedBy = "representante")
-	private List<Pedido> pedidos = new ArrayList<>();
+	private Set<Pedido> pedidos = new HashSet<>();
 
 	@OneToMany(mappedBy = "representante")
-	private List<Cliente> clientes = new ArrayList<>();
+	private Set<Cliente> clientes = new HashSet<>();
 
 	public Representante() {
 	}
@@ -123,19 +123,19 @@ public class Representante {
 		this.endereco = endereco;
 	}
 
-	public List<Pedido> getPedidos() {
+	public Set<Pedido> getPedidos() {
 		return pedidos;
 	}
 
-	public void setPedidos(List<Pedido> pedidos) {
+	public void setPedidos(Set<Pedido> pedidos) {
 		this.pedidos = pedidos;
 	}
 
-	public List<Cliente> getClientes() {
+	public Set<Cliente> getClientes() {
 		return clientes;
 	}
 
-	public void setClientes(List<Cliente> clientes) {
+	public void setClientes(Set<Cliente> clientes) {
 		this.clientes = clientes;
 	}
 

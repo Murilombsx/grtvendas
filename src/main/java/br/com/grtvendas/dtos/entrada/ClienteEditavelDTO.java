@@ -1,8 +1,15 @@
-package br.com.grtvendas.dtos;
+package br.com.grtvendas.dtos.entrada;
 
 import br.com.grtvendas.models.Cliente;
 import br.com.grtvendas.models.Endereco;
 import br.com.grtvendas.models.Representante;
+
+/*
+	Classe de inserção dos dados de um cliente, que filtra apenas os campos que deseja receber:
+		- Alguns campos do cliente
+		- Endereço do cliente
+		- id e nome do representante
+*/
 
 public class ClienteEditavelDTO {
 

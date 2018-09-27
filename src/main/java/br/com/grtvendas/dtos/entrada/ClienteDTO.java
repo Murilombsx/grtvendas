@@ -1,8 +1,15 @@
-package br.com.grtvendas.dtos;
+package br.com.grtvendas.dtos.entrada;
 
 import br.com.grtvendas.models.Cliente;
 import br.com.grtvendas.models.Endereco;
 import br.com.grtvendas.models.Representante;
+
+/*
+	Classe de inserção dos dados de um cliente, que filtra apenas os campos que deseja receber:
+		- Todas informações do cliente (menos id)
+		- Endereço do cliente
+		- id e nome do representante
+*/
 
 public class ClienteDTO {
 
@@ -14,10 +21,11 @@ public class ClienteDTO {
 	private String email;
 	private String telefone;
 	private EnderecoDTO endereco;
-	private Representante representante;
+	private RepresentanteDTO representante;
 
 	public Cliente transformaParaObjeto() {
 		Endereco endereco = this.endereco.transformaParaObjeto();
+		Representante representante = this.representante.transformaParaObjeto();
 		return new Cliente(nomeFantasia, razaoSocial, cnpj, inscricaoEstadual, pessoaContato, email, telefone, endereco,
 				representante);
 	}
@@ -86,11 +94,11 @@ public class ClienteDTO {
 		this.telefone = telefone;
 	}
 
-	public Representante getRepresentante() {
+	public RepresentanteDTO getRepresentante() {
 		return representante;
 	}
 
-	public void setRepresentante(Representante representante) {
+	public void setRepresentante(RepresentanteDTO representante) {
 		this.representante = representante;
 	}
 

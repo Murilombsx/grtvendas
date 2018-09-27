@@ -1,4 +1,4 @@
-package br.com.grtvendas.dtos;
+package br.com.grtvendas.dtos.entrada;
 
 import br.com.grtvendas.models.Representante;
 

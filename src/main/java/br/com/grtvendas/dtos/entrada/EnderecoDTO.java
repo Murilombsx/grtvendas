@@ -1,6 +1,11 @@
-package br.com.grtvendas.dtos;
+package br.com.grtvendas.dtos.entrada;
 
 import br.com.grtvendas.models.Endereco;
+
+/*
+	Classe de inserção dos dados de um endereço, que filtra apenas os campos que deseja receber:
+		- todos campos do endereço, menos o id
+*/
 
 public class EnderecoDTO {
 
