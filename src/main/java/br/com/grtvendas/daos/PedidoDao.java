@@ -41,4 +41,8 @@ public class PedidoDao {
 		}
 	}
 
+	public void atualiza(Pedido pedido) {
+		manager.merge(pedido);
+	}
+
 }

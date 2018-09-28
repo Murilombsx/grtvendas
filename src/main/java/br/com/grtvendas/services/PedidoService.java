@@ -15,6 +15,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import br.com.grtvendas.dtos.entrada.PedidoDTO;
+import br.com.grtvendas.dtos.entrada.PedidoEditavelDTO;
 import br.com.grtvendas.dtos.resposta.PedidoDTOResposta;
 import br.com.grtvendas.dtos.resposta.PedidoResumoDTOResposta;
 import br.com.grtvendas.gerenciador.PedidoGerenciador;
@@ -80,6 +81,21 @@ public class PedidoService {
 
 		return Response.status(Response.Status.OK).entity("Pedido " + pedido.getNumero() + " cadastrado com sucesso!")
 				.build();
+	}
+
+	// Funcionando ok
+	// Possibilita mudar algumas informacoes do pedido
+	@POST
+	@Path("/editar")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public PedidoDTOResposta editar(PedidoEditavelDTO pedidoEditavelDTO) {
+		Pedido pedidoOriginal = pedidoGerenciador.buscaPorId(pedidoEditavelDTO.getId());
+		pedidoGerenciador.atualiza(pedidoOriginal, pedidoEditavelDTO);
+
+		PedidoDTOResposta pedido = new PedidoDTOResposta().transformaEmDTO(pedidoOriginal);
+
+		return pedido;
 	}
 
 }

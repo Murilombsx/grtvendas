@@ -45,6 +45,13 @@ public class Pedido {
 		this.representante = representante;
 	}
 
+	public Pedido(Integer id, int qtdePecas, BigDecimal valorTotal, String observacao) {
+		this.id = id;
+		this.qtdePecas = qtdePecas;
+		this.valorTotal = valorTotal;
+		this.observacao = observacao;
+	}
+
 	public Integer getId() {
 		return id;
 	}
