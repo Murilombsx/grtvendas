@@ -26,4 +26,19 @@ public class PedidoDao {
 		manager.remove(p);		
 	}
 
+	public void cadastrar(Pedido pedido) {
+		manager.persist(pedido);
+		
+	}
+
+	public int buscaUltimoNumeroDePedido() {
+		List<Pedido> pedidos = manager.createQuery("select p from Pedido p", Pedido.class).getResultList();
+		if(pedidos.size() == 0) {
+			return 1;
+		} else {
+			Pedido ultimoPedido = pedidos.get(pedidos.size()-1);
+			return ultimoPedido.getNumero() + 1;
+		}
+	}
+
 }

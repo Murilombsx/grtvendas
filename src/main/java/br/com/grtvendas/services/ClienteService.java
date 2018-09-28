@@ -34,11 +34,11 @@ public class ClienteService {
 	@Path("/cadastrar")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public ClienteDTOResposta cadastrar(ClienteDTO clienteDTO) {
-		Cliente clienteOriginalAuxiliar = clienteGerenciador.cadastrar(clienteDTO.transformaParaObjeto());
-		ClienteDTOResposta cliente = new ClienteDTOResposta().transformaEmDTO(clienteOriginalAuxiliar);
+	public Response cadastrar(ClienteDTO clienteDTO) {
+		Cliente cliente = clienteGerenciador.cadastrar(clienteDTO.transformaParaObjeto());
 
-		return cliente;
+		return Response.status(Response.Status.OK).entity("Cliente " + cliente.getCnpj() + " cadastrado com sucesso!")
+				.build();
 	}
 
 	// Funcionando ok

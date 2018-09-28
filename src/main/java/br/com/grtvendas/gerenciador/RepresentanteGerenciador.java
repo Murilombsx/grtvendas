@@ -47,6 +47,12 @@ public class RepresentanteGerenciador {
 
 	@Transactional
 	public Representante cadastrar(Representante representante) {
+		
+		boolean representanteExiste = representanteDao.existe(representante.getCnpj());
+		if(representanteExiste) {
+			throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST)
+					.entity("Esse representante já está cadastrado no sistema").build());
+		}
 
 		Endereco endereco = representante.getEndereco();
 

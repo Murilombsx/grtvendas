@@ -28,6 +28,12 @@ public class ClienteGerenciador {
 	// representante ja tem que existir no BD
 	@Transactional
 	public Cliente cadastrar(Cliente cliente) {
+		
+		boolean clienteExiste = clienteDao.existe(cliente.getCnpj());
+		if(clienteExiste) {
+			throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST)
+					.entity("Esse cliente já está cadastrado no sistema").build());
+		}
 
 		if (cliente.getRepresentante().getId() == null) {
 			throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST)

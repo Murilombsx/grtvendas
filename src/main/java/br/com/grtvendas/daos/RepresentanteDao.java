@@ -45,4 +45,30 @@ public class RepresentanteDao {
 		manager.merge(representante);
 	}
 
+	public Representante buscaPorCNPJ(String cnpj) {
+		try {
+			try {
+				return manager.createQuery("select r from Representante r join fetch r.clientes join fetch r.pedidos where r.cnpj = :cnpj", Representante.class)
+						.setParameter("cnpj", cnpj).getSingleResult();
+			} catch (NoResultException e) {
+			return manager.createQuery(
+					"select r from Representante r left join fetch r.clientes left join fetch r.pedidos where r.cnpj = :cnpj and r.clientes is empty and r.pedidos is empty",
+					Representante.class).setParameter("cnpj", cnpj).getSingleResult();
+			}
+		} catch (NoResultException e) { // Retorna um representante com id = 0, caso esse representante nao esteja cadastrado no sistema
+			Representante representante = new Representante();
+			representante.setId(0);
+			return representante;
+		}
+	}
+	
+	public boolean existe(String cnpj) {
+		Representante representante = buscaPorCNPJ(cnpj);
+		if (representante.getId() != 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }

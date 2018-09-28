@@ -32,6 +32,23 @@ public class ClienteDao {
 		}
 	}
 
+	public Cliente buscaPorCNPJ(String cnpj) {
+		try {
+			try {
+				return manager.createQuery("select c from Cliente c join fetch c.pedidos where c.cnpj = :cnpj", Cliente.class)
+						.setParameter("cnpj", cnpj).getSingleResult();
+			} catch (NoResultException e) {
+			return manager.createQuery(
+					"select c from Cliente c left join fetch c.pedidos where c.cnpj = :cnpj and c.pedidos is empty",
+					Cliente.class).setParameter("cnpj", cnpj).getSingleResult();
+			}
+		} catch (NoResultException e) { // Retorna um cliente com id = 0, caso esse cliente nao esteja cadastrado no sistema
+			Cliente cliente = new Cliente();
+			cliente.setId(0);
+			return cliente;
+		}
+	}
+
 	public void remove(Cliente cliente) {
 		Object c = manager.merge(cliente);
 		Object e = manager.merge(cliente.getEndereco());
@@ -42,6 +59,15 @@ public class ClienteDao {
 	public void atualiza(Cliente cliente) {
 		manager.merge(cliente.getEndereco());
 		manager.merge(cliente);
+	}
+
+	public boolean existe(String cnpj) {
+		Cliente cliente = buscaPorCNPJ(cnpj);
+		if (cliente.getId() != 0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

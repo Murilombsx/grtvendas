@@ -66,6 +66,11 @@ public class Cliente {
 		this.representante = representante;
 	}
 
+	public Cliente(Integer id, String nomeFantasia) {
+		this.id = id;
+		this.nomeFantasia = nomeFantasia;
+	}
+
 	public Set<Pedido> getPedidos() {
 		return pedidos;
 	}

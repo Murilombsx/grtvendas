@@ -78,13 +78,11 @@ public class RepresentanteService {
 	@Path("/cadastrar")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public RepresentanteDTOResposta cadastrar(RepresentanteDTO representanteDTO) {
-		Representante representanteOriginalAuxiliar = representanteGerenciador
-				.cadastrar(representanteDTO.transformaParaObjeto());
-		RepresentanteDTOResposta representante = new RepresentanteDTOResposta()
-				.transformaEmDTO(representanteOriginalAuxiliar);
+	public Response cadastrar(RepresentanteDTO representanteDTO) {
+		Representante representante = representanteGerenciador.cadastrar(representanteDTO.transformaParaObjeto());
 
-		return representante;
+		return Response.status(Response.Status.OK)
+				.entity("Representante " + representante.getNome() + " cadastrado com sucesso!").build();
 	}
 
 	// Funcionando ok

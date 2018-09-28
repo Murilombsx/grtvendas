@@ -5,13 +5,16 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import br.com.grtvendas.dtos.entrada.PedidoDTO;
 import br.com.grtvendas.dtos.resposta.PedidoDTOResposta;
 import br.com.grtvendas.dtos.resposta.PedidoResumoDTOResposta;
 import br.com.grtvendas.gerenciador.PedidoGerenciador;
@@ -63,6 +66,19 @@ public class PedidoService {
 		pedidoGerenciador.remove(pedido);
 
 		return Response.status(Response.Status.OK).entity("Pedido " + pedido.getNumero() + " deletado com sucesso!")
+				.build();
+	}
+
+	// Funcionando ok
+	// Cadastra um pedido
+	@POST
+	@Path("/cadastrar")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response cadastrar(PedidoDTO pedidoDTO) {
+		Pedido pedido = pedidoGerenciador.cadastrar(pedidoDTO.transformaParaObjeto());
+
+		return Response.status(Response.Status.OK).entity("Pedido " + pedido.getNumero() + " cadastrado com sucesso!")
 				.build();
 	}
 
