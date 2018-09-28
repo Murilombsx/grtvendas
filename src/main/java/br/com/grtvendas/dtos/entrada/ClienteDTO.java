@@ -30,14 +30,6 @@ public class ClienteDTO {
 				representante);
 	}
 
-	public EnderecoDTO getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(EnderecoDTO endereco) {
-		this.endereco = endereco;
-	}
-
 	public String getNomeFantasia() {
 		return nomeFantasia;
 	}
@@ -92,6 +84,14 @@ public class ClienteDTO {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+
+	public EnderecoDTO getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(EnderecoDTO endereco) {
+		this.endereco = endereco;
 	}
 
 	public RepresentanteResumoDTO getRepresentante() {

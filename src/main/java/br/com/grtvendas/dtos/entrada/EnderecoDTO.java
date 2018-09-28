@@ -16,7 +16,7 @@ public class EnderecoDTO {
 	private String cidade;
 	private String estado;
 	private String cep;
-	
+
 	public Endereco transformaParaObjeto() {
 		return new Endereco(rua, numero, complemento, bairro, cidade, estado, cep);
 	}

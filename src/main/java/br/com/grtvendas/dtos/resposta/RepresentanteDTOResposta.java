@@ -26,6 +26,7 @@ public class RepresentanteDTOResposta {
 	private Calendar dataEntrada;
 	private String razaoSocial;
 	private String cnpj;
+	private String telefone;
 	private Endereco endereco;
 	private Set<ClienteResumoRefinadoDTOResposta> clientes = new HashSet<>();
 	private Set<PedidoResumoRefinadoDTOResposta> pedidos = new HashSet<>();
@@ -34,7 +35,7 @@ public class RepresentanteDTOResposta {
 	}
 
 	public RepresentanteDTOResposta(Integer id, String nome, String cpf, String rg, String email, Calendar dataEntrada,
-			String razaoSocial, String cnpj, Endereco endereco, Set<ClienteResumoRefinadoDTOResposta> clientes,
+			String razaoSocial, String cnpj, String telefone, Endereco endereco, Set<ClienteResumoRefinadoDTOResposta> clientes,
 			Set<PedidoResumoRefinadoDTOResposta> pedidos) {
 		this.id = id;
 		this.nome = nome;
@@ -44,6 +45,7 @@ public class RepresentanteDTOResposta {
 		this.dataEntrada = dataEntrada;
 		this.razaoSocial = razaoSocial;
 		this.cnpj = cnpj;
+		this.telefone = telefone;
 		this.endereco = endereco;
 		this.clientes = clientes;
 		this.pedidos = pedidos;
@@ -61,14 +63,23 @@ public class RepresentanteDTOResposta {
 		Set<PedidoResumoRefinadoDTOResposta> pedidos = new HashSet<>();
 		Set<Pedido> pedidosOriginalAuxiliar = representante.getPedidos();
 		for (Pedido pedidoOriginalAuxiliar : pedidosOriginalAuxiliar) {
-			PedidoResumoRefinadoDTOResposta pedido = new PedidoResumoRefinadoDTOResposta().transformaEmDTO(pedidoOriginalAuxiliar);
+			PedidoResumoRefinadoDTOResposta pedido = new PedidoResumoRefinadoDTOResposta()
+					.transformaEmDTO(pedidoOriginalAuxiliar);
 			pedidos.add(pedido);
 		}
 
 		return new RepresentanteDTOResposta(representante.getId(), representante.getNome(), representante.getCpf(),
 				representante.getRg(), representante.getEmail(), representante.getDataEntrada(),
-				representante.getRazaoSocial(), representante.getCnpj(), representante.getEndereco(), clientes,
+				representante.getRazaoSocial(), representante.getCnpj(), representante.getTelefone(), representante.getEndereco(), clientes,
 				pedidos);
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
 	public Integer getId() {

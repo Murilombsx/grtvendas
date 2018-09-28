@@ -1,6 +1,7 @@
 package br.com.grtvendas.gerenciador;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -71,7 +72,7 @@ public class ClienteGerenciador {
 
 	@Transactional
 	public void remove(Cliente cliente) {
-		List<Pedido> pedidos = cliente.getPedidos();
+		Set<Pedido> pedidos = cliente.getPedidos();
 		if (!pedidos.isEmpty()) {
 			throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST)
 					.entity("Não é possível remover um cliente com pedidos cadastrados").build());

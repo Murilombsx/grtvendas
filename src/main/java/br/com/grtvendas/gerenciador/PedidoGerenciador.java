@@ -15,5 +15,9 @@ public class PedidoGerenciador {
 	public List<Pedido> todosPedidos() {
 		return pedidoDao.listar();
 	}
+
+	public Pedido buscaPorId(Integer id) {
+		return pedidoDao.buscaPorId(id);
+	}
 	
 }

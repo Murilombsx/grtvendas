@@ -7,9 +7,11 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import br.com.grtvendas.dtos.resposta.PedidoDTOResposta;
 import br.com.grtvendas.dtos.resposta.PedidoResumoDTOResposta;
 import br.com.grtvendas.gerenciador.PedidoGerenciador;
 import br.com.grtvendas.models.Pedido;
@@ -35,6 +37,19 @@ public class PedidoService {
 		}
 
 		return pedidos;
+	}
+
+	// Funcionando ok
+	// Detalha um pedido, com todas informações sobre ele, incluso
+	// representante e cliente
+	@GET
+	@Path("/detalhe/{idPedido}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public PedidoDTOResposta detalhe(@PathParam("idPedido") Integer idPedido) {
+		Pedido pedidoOriginalAuxiliar = pedidoGerenciador.buscaPorId(idPedido);
+		PedidoDTOResposta pedido = new PedidoDTOResposta().transformaEmDTO(pedidoOriginalAuxiliar);
+
+		return pedido;
 	}
 
 }

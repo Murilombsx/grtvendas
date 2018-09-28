@@ -1,7 +1,7 @@
 package br.com.grtvendas.models;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,12 +34,13 @@ public class Cliente {
 	private Endereco endereco;
 
 	@OneToMany(mappedBy = "cliente")
-	private List<Pedido> pedidos = new ArrayList<>();
+	private Set<Pedido> pedidos = new HashSet<>();
 
 	@ManyToOne
 	private Representante representante;
-	
-	public Cliente() {}
+
+	public Cliente() {
+	}
 
 	public Cliente(String nomeFantasia, String razaoSocial, String cnpj, String inscricaoEstadual, String pessoaContato,
 			String email, String telefone, Endereco endereco, Representante representante) {
@@ -65,11 +66,11 @@ public class Cliente {
 		this.representante = representante;
 	}
 
-	public List<Pedido> getPedidos() {
+	public Set<Pedido> getPedidos() {
 		return pedidos;
 	}
 
-	public void setPedidos(List<Pedido> pedidos) {
+	public void setPedidos(Set<Pedido> pedidos) {
 		this.pedidos = pedidos;
 	}
 

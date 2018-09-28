@@ -26,7 +26,7 @@ public class RepresentanteResumoDTOResposta {
 	public RepresentanteResumoDTOResposta transformaEmDTO(Representante representante) {
 		Endereco enderecoOriginalAuxiliar = representante.getEndereco();
 		EnderecoResumoDTOResposta endereco = new EnderecoResumoDTOResposta().transformaEmDTO(enderecoOriginalAuxiliar);
-		
+
 		return new RepresentanteResumoDTOResposta(representante.getId(), representante.getNome(), endereco);
 	}
 

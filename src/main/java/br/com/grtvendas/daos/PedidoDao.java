@@ -16,4 +16,9 @@ public class PedidoDao {
 		return manager.createQuery("select p from Pedido p", Pedido.class).getResultList();
 	}
 
+	public Pedido buscaPorId(Integer id) {
+		return manager.createQuery("select p from Pedido p where p.id = :id", Pedido.class)
+				.setParameter("id", id).getSingleResult();
+	}
+
 }

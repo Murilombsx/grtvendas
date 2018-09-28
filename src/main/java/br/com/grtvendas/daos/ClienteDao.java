@@ -24,10 +24,11 @@ public class ClienteDao {
 	public Cliente buscaPorId(int id) {
 		try {
 			return manager.createQuery("select c from Cliente c join fetch c.pedidos where c.id = :id", Cliente.class)
-				.setParameter("id", id).getSingleResult();
-		} catch(NoResultException e) {
-			return manager.createQuery("select c from Cliente c left join fetch c.pedidos where c.id = :id and c.pedidos is empty", Cliente.class)
 					.setParameter("id", id).getSingleResult();
+		} catch (NoResultException e) {
+			return manager.createQuery(
+					"select c from Cliente c left join fetch c.pedidos where c.id = :id and c.pedidos is empty",
+					Cliente.class).setParameter("id", id).getSingleResult();
 		}
 	}
 

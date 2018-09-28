@@ -1,7 +1,7 @@
 package br.com.grtvendas.dtos.resposta;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import br.com.grtvendas.models.Cliente;
 import br.com.grtvendas.models.Endereco;
@@ -27,14 +27,14 @@ public class ClienteDTOResposta {
 	private String telefone;
 	private Endereco endereco;
 	private RepresentanteResumoDTOResposta representante;
-	private List<PedidoResumoRefinadoDTOResposta> pedidos = new ArrayList<>();
+	private Set<PedidoResumoRefinadoDTOResposta> pedidos = new HashSet<>();
 
 	public ClienteDTOResposta() {
 	}
 
 	public ClienteDTOResposta(Integer id, String nomeFantasia, String razaoSocial, String cnpj,
 			String inscricaoEstadual, String pessoaContato, String email, String telefone, Endereco endereco,
-			RepresentanteResumoDTOResposta representante, List<PedidoResumoRefinadoDTOResposta> pedidos) {
+			RepresentanteResumoDTOResposta representante, Set<PedidoResumoRefinadoDTOResposta> pedidos) {
 		this.id = id;
 		this.nomeFantasia = nomeFantasia;
 		this.razaoSocial = razaoSocial;
@@ -53,11 +53,12 @@ public class ClienteDTOResposta {
 		RepresentanteResumoDTOResposta representante = new RepresentanteResumoDTOResposta()
 				.transformaEmDTO(representanteOriginalAuxiliar);
 
-		List<PedidoResumoRefinadoDTOResposta> pedidos = new ArrayList<>();
-		List<Pedido> pedidosOriginalAuxiliar = cliente.getPedidos();
+		Set<PedidoResumoRefinadoDTOResposta> pedidos = new HashSet<>();
+		Set<Pedido> pedidosOriginalAuxiliar = cliente.getPedidos();
 
 		for (Pedido pedidoOriginalAuxiliar : pedidosOriginalAuxiliar) {
-			PedidoResumoRefinadoDTOResposta pedido = new PedidoResumoRefinadoDTOResposta().transformaEmDTO(pedidoOriginalAuxiliar);
+			PedidoResumoRefinadoDTOResposta pedido = new PedidoResumoRefinadoDTOResposta()
+					.transformaEmDTO(pedidoOriginalAuxiliar);
 			pedidos.add(pedido);
 		}
 
@@ -146,11 +147,11 @@ public class ClienteDTOResposta {
 		this.representante = representante;
 	}
 
-	public List<PedidoResumoRefinadoDTOResposta> getPedidos() {
+	public Set<PedidoResumoRefinadoDTOResposta> getPedidos() {
 		return pedidos;
 	}
 
-	public void setPedidos(List<PedidoResumoRefinadoDTOResposta> pedidos) {
+	public void setPedidos(Set<PedidoResumoRefinadoDTOResposta> pedidos) {
 		this.pedidos = pedidos;
 	}
 

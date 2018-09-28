@@ -16,13 +16,13 @@ public class PedidoResumoDTOResposta {
 	private Integer id;
 	private int numero;
 	private ClienteResumoRefinadoDTOResposta cliente;
-	private RepresentanteResumoRefinadoDTOResposta representante;
+	private RepresentanteResumoDTOResposta representante;
 
 	public PedidoResumoDTOResposta() {
 	}
 
 	public PedidoResumoDTOResposta(Integer id, int numero, ClienteResumoRefinadoDTOResposta cliente,
-			RepresentanteResumoRefinadoDTOResposta representante) {
+			RepresentanteResumoDTOResposta representante) {
 		this.id = id;
 		this.numero = numero;
 		this.cliente = cliente;
@@ -35,7 +35,7 @@ public class PedidoResumoDTOResposta {
 				.transformaEmDTO(clienteOriginalAuxiliar);
 
 		Representante representanteOriginalAuxiliar = pedido.getRepresentante();
-		RepresentanteResumoRefinadoDTOResposta representante = new RepresentanteResumoRefinadoDTOResposta()
+		RepresentanteResumoDTOResposta representante = new RepresentanteResumoDTOResposta()
 				.transformaEmDTO(representanteOriginalAuxiliar);
 
 		return new PedidoResumoDTOResposta(pedido.getId(), pedido.getNumero(), cliente, representante);
@@ -65,11 +65,11 @@ public class PedidoResumoDTOResposta {
 		this.cliente = cliente;
 	}
 
-	public RepresentanteResumoRefinadoDTOResposta getRepresentante() {
+	public RepresentanteResumoDTOResposta getRepresentante() {
 		return representante;
 	}
 
-	public void setRepresentante(RepresentanteResumoRefinadoDTOResposta representante) {
+	public void setRepresentante(RepresentanteResumoDTOResposta representante) {
 		this.representante = representante;
 	}
 
