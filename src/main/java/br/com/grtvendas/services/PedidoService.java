@@ -10,6 +10,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import br.com.grtvendas.dtos.resposta.PedidoDTOResposta;
 import br.com.grtvendas.dtos.resposta.PedidoResumoDTOResposta;
@@ -50,6 +51,19 @@ public class PedidoService {
 		PedidoDTOResposta pedido = new PedidoDTOResposta().transformaEmDTO(pedidoOriginalAuxiliar);
 
 		return pedido;
+	}
+
+	// Funcionando ok
+	// Pode deletar um pedido através de seu id
+	@GET
+	@Path("/deletar/{idPedido}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response deletar(@PathParam("idPedido") Integer idPedido) {
+		Pedido pedido = pedidoGerenciador.buscaPorId(idPedido);
+		pedidoGerenciador.remove(pedido);
+
+		return Response.status(Response.Status.OK).entity("Pedido " + pedido.getNumero() + " deletado com sucesso!")
+				.build();
 	}
 
 }

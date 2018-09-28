@@ -21,4 +21,9 @@ public class PedidoDao {
 				.setParameter("id", id).getSingleResult();
 	}
 
+	public void remove(Pedido pedido) {
+		Object p = manager.merge(pedido);
+		manager.remove(p);		
+	}
+
 }
