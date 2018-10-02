@@ -46,7 +46,7 @@ public class PedidoGerenciador {
 		pedido.setNumero(numero);
 
 		if (pedido.getNumero() == 0 || pedido.getQtdePecas() == 0 || pedido.getValorTotal().toString().trim().equals("")
-				|| pedido.getValorTotal().toString() != "0") {
+				|| pedido.getValorTotal().toString() == "0") {
 			throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST)
 					.entity("Campos obrigatórios não foram preenchidos").build());
 		} else {
