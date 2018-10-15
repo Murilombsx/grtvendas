@@ -31,12 +31,12 @@ public class ClienteGerenciador {
 		
 		boolean clienteExiste = clienteDao.existe(cliente.getCnpj());
 		if(clienteExiste) {
-			throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST)
+			throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
 					.entity("Esse cliente já está cadastrado no sistema").build());
 		}
 
 		if (cliente.getRepresentante().getId() == null) {
-			throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST)
+			throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
 					.entity("É necessário ter um representante associado ao cliente").build());
 		}
 
@@ -48,7 +48,7 @@ public class ClienteGerenciador {
 				|| endereco.getCidade().trim().equals("") || endereco.getEstado() == null
 				|| endereco.getEstado().trim().equals("") || endereco.getCep() == null
 				|| endereco.getCep().trim().equals("")) {
-			throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST)
+			throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
 					.entity("Campos obrigatórios de endereço não foram preenchidos").build());
 		} else {
 			enderecoDao.cadastrar(endereco);
@@ -60,7 +60,7 @@ public class ClienteGerenciador {
 				|| cliente.getRazaoSocial().trim().equals("") || cliente.getTelefone() == null
 				|| cliente.getTelefone().trim().equals("") || cliente.getPessoaContato() == null
 				|| cliente.getPessoaContato().trim().equals("")) {
-			throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST)
+			throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
 					.entity("Campos obrigatórios não foram preenchidos").build());
 		} else {
 			clienteDao.cadastrar(cliente);
@@ -80,7 +80,7 @@ public class ClienteGerenciador {
 	public void remove(Cliente cliente) {
 		Set<Pedido> pedidos = cliente.getPedidos();
 		if (!pedidos.isEmpty()) {
-			throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST)
+			throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
 					.entity("Não é possível remover um cliente com pedidos cadastrados").build());
 		} else {
 			clienteDao.remove(cliente);
@@ -158,14 +158,12 @@ public class ClienteGerenciador {
 				&& (!clienteEditavelDTO.getRepresentante().getId().toString().trim().equals(""))) {
 			cliente.getRepresentante().setId(clienteEditavelDTO.getRepresentante().getId());
 		}
-		
-		if ((cliente.getRepresentante().getNome() != clienteEditavelDTO.getRepresentante().getNome())
-				&& (clienteEditavelDTO.getRepresentante().getNome() != null)
-				&& (!clienteEditavelDTO.getRepresentante().getNome().toString().trim().equals(""))) {
-			cliente.getRepresentante().setNome(clienteEditavelDTO.getRepresentante().getNome());
-		}
 
 		clienteDao.atualiza(cliente);
+	}
+
+	public Cliente buscaPorNome(String nome) {
+		return clienteDao.buscaPorNome(nome);
 	}
 
 }

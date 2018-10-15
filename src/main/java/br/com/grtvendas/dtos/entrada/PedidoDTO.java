@@ -18,8 +18,8 @@ public class PedidoDTO {
 	private int qtdePecas;
 	private BigDecimal valorTotal;
 	private String observacao;
-	private ClienteResumoDTO cliente;
-	private RepresentanteResumoDTO representante;
+	private ClienteIdDTO cliente;
+	private RepresentanteIdDTO representante;
 
 	public Pedido transformaParaObjeto() {
 		Cliente cliente = this.cliente.transformaParaObjeto();
@@ -51,19 +51,19 @@ public class PedidoDTO {
 		this.observacao = observacao;
 	}
 
-	public ClienteResumoDTO getCliente() {
+	public ClienteIdDTO getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(ClienteResumoDTO cliente) {
+	public void setCliente(ClienteIdDTO cliente) {
 		this.cliente = cliente;
 	}
 
-	public RepresentanteResumoDTO getRepresentante() {
+	public RepresentanteIdDTO getRepresentante() {
 		return representante;
 	}
 
-	public void setRepresentante(RepresentanteResumoDTO representante) {
+	public void setRepresentante(RepresentanteIdDTO representante) {
 		this.representante = representante;
 	}
 

@@ -21,7 +21,7 @@ public class ClienteDTO {
 	private String email;
 	private String telefone;
 	private EnderecoDTO endereco;
-	private RepresentanteResumoDTO representante;
+	private RepresentanteIdDTO representante;
 
 	public Cliente transformaParaObjeto() {
 		Endereco endereco = this.endereco.transformaParaObjeto();
@@ -94,11 +94,11 @@ public class ClienteDTO {
 		this.endereco = endereco;
 	}
 
-	public RepresentanteResumoDTO getRepresentante() {
+	public RepresentanteIdDTO getRepresentante() {
 		return representante;
 	}
 
-	public void setRepresentante(RepresentanteResumoDTO representante) {
+	public void setRepresentante(RepresentanteIdDTO representante) {
 		this.representante = representante;
 	}
 

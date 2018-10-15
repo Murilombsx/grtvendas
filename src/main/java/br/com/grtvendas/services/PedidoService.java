@@ -59,15 +59,14 @@ public class PedidoService {
 
 	// Funcionando ok
 	// Pode deletar um pedido através de seu id
-	@GET
-	@Path("/deletar/{idPedido}")
+	@POST
+	@Path("/deletar")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response deletar(@PathParam("idPedido") Integer idPedido) {
+	public Response deletar(Integer idPedido) {
 		Pedido pedido = pedidoGerenciador.buscaPorId(idPedido);
 		pedidoGerenciador.remove(pedido);
 
-		return Response.status(Response.Status.OK).entity("Pedido " + pedido.getNumero() + " deletado com sucesso!")
-				.build();
+		return Response.status(Response.Status.OK).build();
 	}
 
 	// Funcionando ok
@@ -77,10 +76,9 @@ public class PedidoService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response cadastrar(PedidoDTO pedidoDTO) {
-		Pedido pedido = pedidoGerenciador.cadastrar(pedidoDTO.transformaParaObjeto());
+		pedidoGerenciador.cadastrar(pedidoDTO.transformaParaObjeto());
 
-		return Response.status(Response.Status.OK).entity("Pedido " + pedido.getNumero() + " cadastrado com sucesso!")
-				.build();
+		return Response.status(Response.Status.OK).build();
 	}
 
 	// Funcionando ok
@@ -89,13 +87,11 @@ public class PedidoService {
 	@Path("/editar")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public PedidoDTOResposta editar(PedidoEditavelDTO pedidoEditavelDTO) {
+	public Response editar(PedidoEditavelDTO pedidoEditavelDTO) {
 		Pedido pedidoOriginal = pedidoGerenciador.buscaPorId(pedidoEditavelDTO.getId());
 		pedidoGerenciador.atualiza(pedidoOriginal, pedidoEditavelDTO);
 
-		PedidoDTOResposta pedido = new PedidoDTOResposta().transformaEmDTO(pedidoOriginal);
-
-		return pedido;
+		return Response.status(Response.Status.OK).build();
 	}
 
 }

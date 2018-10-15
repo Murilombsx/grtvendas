@@ -55,20 +55,19 @@ public class PedidoGerenciador {
 
 		return pedido;
 	}
-	
+
 	@Transactional
 	public void atualiza(Pedido pedido, PedidoEditavelDTO pedidoEditavelDTO) {
 		if ((pedido.getQtdePecas() != pedidoEditavelDTO.getQtdePecas()) && (pedidoEditavelDTO.getQtdePecas() != 0)) {
 			pedido.setQtdePecas(pedidoEditavelDTO.getQtdePecas());
 		}
 
-		if ((pedido.getValorTotal() != pedidoEditavelDTO.getValorTotal())
-				&& (pedidoEditavelDTO.getValorTotal().toString() != "0") && (!pedidoEditavelDTO.getValorTotal().toString().trim().equals(""))) {
+		if ((pedido.getValorTotal() != pedidoEditavelDTO.getValorTotal()) && (pedidoEditavelDTO.getValorTotal() != null)
+				&& (Integer.parseInt(pedidoEditavelDTO.getValorTotal().toString()) != 0)) {
 			pedido.setValorTotal(pedidoEditavelDTO.getValorTotal());
 		}
 
-		if ((pedido.getObservacao() != pedidoEditavelDTO.getObservacao())
-				&& (pedidoEditavelDTO.getObservacao() != null)
+		if ((pedido.getObservacao() != pedidoEditavelDTO.getObservacao()) && (pedidoEditavelDTO.getObservacao() != null)
 				&& (!pedidoEditavelDTO.getObservacao().trim().equals(""))) {
 			pedido.setObservacao(pedidoEditavelDTO.getObservacao());
 		}

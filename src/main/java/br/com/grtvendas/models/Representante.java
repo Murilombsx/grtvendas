@@ -52,7 +52,7 @@ public class Representante {
 		this.nome = nome;
 	}
 
-	public Representante(String nome, String razaoSocial, String cnpj, String cpf, String rg, String email, Calendar dataEntrada,
+	public Representante(String nome, String razaoSocial, String cnpj, String cpf, String rg, String email,
 			String telefone, Endereco endereco) {
 		this.nome = nome;
 		this.razaoSocial = razaoSocial;
@@ -60,7 +60,6 @@ public class Representante {
 		this.cpf = cpf;
 		this.rg = rg;
 		this.email = email;
-		this.dataEntrada = dataEntrada;
 		this.telefone = telefone;
 		this.endereco = endereco;
 	}

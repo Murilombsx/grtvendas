@@ -1,5 +1,8 @@
 package br.com.grtvendas.gerenciador;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Set;
 
@@ -31,13 +34,17 @@ public class RepresentanteGerenciador {
 	public Representante buscaPorId(Integer id) {
 		return representanteDao.buscaPorId(id);
 	}
+	
+	public Representante buscaPorNome(String nome) {
+		return representanteDao.buscaPorNome(nome);
+	}
 
 	@Transactional
 	public void remove(Representante representante) {
 		Set<Pedido> pedidos = representante.getPedidos();
 		Set<Cliente> clientes = representante.getClientes();
 		if (!pedidos.isEmpty() || !clientes.isEmpty()) {
-			throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST)
+			throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
 					.entity("Não é possível remover um representante com um cliente ou pedido associado").build());
 		} else {
 			representanteDao.remove(representante);
@@ -50,7 +57,7 @@ public class RepresentanteGerenciador {
 		
 		boolean representanteExiste = representanteDao.existe(representante.getCnpj());
 		if(representanteExiste) {
-			throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST)
+			throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
 					.entity("Esse representante já está cadastrado no sistema").build());
 		}
 
@@ -62,12 +69,15 @@ public class RepresentanteGerenciador {
 				|| endereco.getCidade().trim().equals("") || endereco.getEstado() == null
 				|| endereco.getEstado().trim().equals("") || endereco.getCep() == null
 				|| endereco.getCep().trim().equals("")) {
-			throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST)
-					.entity("Campos obrigatórios de endereço não foram preenchidos").build());
+			throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
+					.entity("Campos obrigatórios de endereço não foram preenchidos!").build());
 		} else {
 			enderecoDao.cadastrar(endereco);
 		}
-
+		Date data = new Date();
+		Calendar cal = new GregorianCalendar();
+		cal.setTime(data);
+		representante.setDataEntrada(cal);
 		if (representante.getCnpj() == null || representante.getCnpj().trim().equals("")
 				|| representante.getCpf() == null || representante.getCpf().trim().equals("")
 				|| representante.getEmail() == null || representante.getEmail().trim().equals("")
@@ -76,8 +86,8 @@ public class RepresentanteGerenciador {
 				|| representante.getRg() == null || representante.getRg().trim().equals("")
 				|| representante.getDataEntrada() == null || representante.getDataEntrada().toString().trim().equals("")
 				|| representante.getNome() == null || representante.getNome().trim().equals("")) {
-			throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST)
-					.entity("Campos obrigatórios não foram preenchidos").build());
+			throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
+					.entity("Campos obrigatórios não foram preenchidos!").build());
 		} else {
 			representanteDao.cadastrar(representante);
 		}

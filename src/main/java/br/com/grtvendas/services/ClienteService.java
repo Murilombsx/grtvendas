@@ -35,10 +35,9 @@ public class ClienteService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response cadastrar(ClienteDTO clienteDTO) {
-		Cliente cliente = clienteGerenciador.cadastrar(clienteDTO.transformaParaObjeto());
+		clienteGerenciador.cadastrar(clienteDTO.transformaParaObjeto());
 
-		return Response.status(Response.Status.OK).entity("Cliente " + cliente.getCnpj() + " cadastrado com sucesso!")
-				.build();
+		return Response.status(Response.Status.OK).build();
 	}
 
 	// Funcionando ok
@@ -58,7 +57,8 @@ public class ClienteService {
 	}
 
 	// Funcionando ok
-	// Detalha um cliente, com todas informações sobre ele, incluso endereço, representante e pedidos
+	// Detalha um cliente, com todas informações sobre ele, incluso endereço,
+	// representante e pedidos
 	@GET
 	@Path("/detalhe/{idCliente}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -71,28 +71,37 @@ public class ClienteService {
 
 	// Funcionando ok
 	// Pode deletar um cliente através de seu id
-	@GET
-	@Path("/deletar/{idCliente}")
+	@POST
+	@Path("/deletar")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response deletar(@PathParam("idCliente") Integer idCliente) {
+	public Response deletar(Integer idCliente) {
 		Cliente cliente = clienteGerenciador.buscaPorId(idCliente);
 		clienteGerenciador.remove(cliente);
 
-		return Response.status(Response.Status.OK).entity("Cliente " + cliente.getCnpj() + " deletado com sucesso!")
-				.build();
+		return Response.status(Response.Status.OK).build();
 	}
-	
+
 	// Funcionando ok
-	// Possibilita mudar algumas informacoes do cliente, incluso endereço e representante através de seu id
+	// Possibilita mudar algumas informacoes do cliente, incluso endereço e
+	// representante através de seu id
 	@POST
 	@Path("/editar")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public ClienteDTOResposta editar(ClienteEditavelDTO clienteEditavelDTO) {
+	public Response editar(ClienteEditavelDTO clienteEditavelDTO) {
 		Cliente clienteOriginal = clienteGerenciador.buscaPorId(clienteEditavelDTO.getId());
 		clienteGerenciador.atualiza(clienteOriginal, clienteEditavelDTO);
-		
-		ClienteDTOResposta cliente = new ClienteDTOResposta().transformaEmDTO(clienteOriginal);
+
+		return Response.status(Response.Status.OK).build();
+	}
+	
+	@GET
+	@Path("/buscar/{nomeCliente}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ClienteResumoDTOResposta buscaPorNome(@PathParam("nomeCliente") String nomeCliente) {
+		Cliente clienteOriginalAuxiliar = clienteGerenciador.buscaPorNome(nomeCliente);
+		ClienteResumoDTOResposta cliente = new ClienteResumoDTOResposta()
+				.transformaEmDTO(clienteOriginalAuxiliar);
 
 		return cliente;
 	}

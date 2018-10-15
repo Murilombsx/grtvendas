@@ -2,13 +2,12 @@ package br.com.grtvendas.dtos.entrada;
 
 import br.com.grtvendas.models.Representante;
 
-public class RepresentanteResumoDTO {
+public class RepresentanteIdDTO {
 
 	private Integer id;
-	private String nome;
 
 	public Representante transformaParaObjeto() {
-		return new Representante(id, nome);
+		return new Representante(id);
 	}
 
 	public Integer getId() {
@@ -17,14 +16,6 @@ public class RepresentanteResumoDTO {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 
 }

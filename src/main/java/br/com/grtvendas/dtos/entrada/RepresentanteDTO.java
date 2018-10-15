@@ -1,7 +1,5 @@
 package br.com.grtvendas.dtos.entrada;
 
-import java.util.Calendar;
-
 import br.com.grtvendas.models.Endereco;
 import br.com.grtvendas.models.Representante;
 
@@ -17,7 +15,6 @@ public class RepresentanteDTO {
 	private String cpf;
 	private String rg;
 	private String email;
-	private Calendar dataEntrada;
 	private String razaoSocial;
 	private String cnpj;
 	private String telefone;
@@ -25,7 +22,7 @@ public class RepresentanteDTO {
 
 	public Representante transformaParaObjeto() {
 		Endereco endereco = this.endereco.transformaParaObjeto();
-		return new Representante(nome, razaoSocial, cnpj, cpf, rg, email, dataEntrada, telefone, endereco);
+		return new Representante(nome, razaoSocial, cnpj, cpf, rg, email, telefone, endereco);
 	}
 
 	public String getNome() {
@@ -66,14 +63,6 @@ public class RepresentanteDTO {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public Calendar getDataEntrada() {
-		return dataEntrada;
-	}
-
-	public void setDataEntrada(Calendar dataEntrada) {
-		this.dataEntrada = dataEntrada;
 	}
 
 	public String getRazaoSocial() {

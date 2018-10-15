@@ -14,14 +14,14 @@ import br.com.grtvendas.models.Representante;
 public class PedidoResumoDTOResposta {
 
 	private Integer id;
-	private int numero;
+	private String numero;
 	private ClienteResumoRefinadoDTOResposta cliente;
 	private RepresentanteResumoDTOResposta representante;
 
 	public PedidoResumoDTOResposta() {
 	}
 
-	public PedidoResumoDTOResposta(Integer id, int numero, ClienteResumoRefinadoDTOResposta cliente,
+	public PedidoResumoDTOResposta(Integer id, String numero, ClienteResumoRefinadoDTOResposta cliente,
 			RepresentanteResumoDTOResposta representante) {
 		this.id = id;
 		this.numero = numero;
@@ -38,7 +38,7 @@ public class PedidoResumoDTOResposta {
 		RepresentanteResumoDTOResposta representante = new RepresentanteResumoDTOResposta()
 				.transformaEmDTO(representanteOriginalAuxiliar);
 
-		return new PedidoResumoDTOResposta(pedido.getId(), pedido.getNumero(), cliente, representante);
+		return new PedidoResumoDTOResposta(pedido.getId(), Integer.toString(pedido.getNumero()) , cliente, representante);
 	}
 
 	public Integer getId() {
@@ -49,11 +49,11 @@ public class PedidoResumoDTOResposta {
 		this.id = id;
 	}
 
-	public int getNumero() {
+	public String getNumero() {
 		return numero;
 	}
 
-	public void setNumero(int numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 

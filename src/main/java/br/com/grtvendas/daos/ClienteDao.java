@@ -7,6 +7,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import br.com.grtvendas.models.Cliente;
+import br.com.grtvendas.models.Representante;
 
 public class ClienteDao {
 
@@ -68,6 +69,10 @@ public class ClienteDao {
 		} else {
 			return false;
 		}
+	}
+
+	public Cliente buscaPorNome(String nome) {
+		return manager.createQuery("select c from Cliente c where c.nomeFantasia = :nome", Cliente.class).setParameter("nome", nome).getSingleResult();
 	}
 
 }

@@ -17,6 +17,7 @@ import javax.ws.rs.core.Response;
 import br.com.grtvendas.dtos.entrada.RepresentanteDTO;
 import br.com.grtvendas.dtos.entrada.RepresentanteEditavelDTO;
 import br.com.grtvendas.dtos.resposta.RepresentanteDTOResposta;
+import br.com.grtvendas.dtos.resposta.RepresentanteIdEstDTOResposta;
 import br.com.grtvendas.dtos.resposta.RepresentanteResumoDTOResposta;
 import br.com.grtvendas.gerenciador.RepresentanteGerenciador;
 import br.com.grtvendas.models.Representante;
@@ -61,15 +62,14 @@ public class RepresentanteService {
 
 	// Funcionando ok
 	// Pode deletar um representante através de seu id
-	@GET
-	@Path("/deletar/{idRepresentante}")
+	@POST
+	@Path("/deletar")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response deletar(@PathParam("idRepresentante") Integer idRepresentante) {
+	public Response deletar(Integer idRepresentante) {
 		Representante representante = representanteGerenciador.buscaPorId(idRepresentante);
 		representanteGerenciador.remove(representante);
 
-		return Response.status(Response.Status.OK)
-				.entity("Representante " + representante.getNome() + " deletado com sucesso!").build();
+		return Response.status(Response.Status.OK).build();
 	}
 
 	// Funcionando ok
@@ -79,10 +79,9 @@ public class RepresentanteService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response cadastrar(RepresentanteDTO representanteDTO) {
-		Representante representante = representanteGerenciador.cadastrar(representanteDTO.transformaParaObjeto());
+		representanteGerenciador.cadastrar(representanteDTO.transformaParaObjeto());
 
-		return Response.status(Response.Status.OK)
-				.entity("Representante " + representante.getNome() + " cadastrado com sucesso!").build();
+		return Response.status(Response.Status.OK).build();
 	}
 
 	// Funcionando ok
@@ -91,11 +90,20 @@ public class RepresentanteService {
 	@Path("/editar")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public RepresentanteDTOResposta editar(RepresentanteEditavelDTO representanteEditavelDTO) {
+	public Response editar(RepresentanteEditavelDTO representanteEditavelDTO) {
 		Representante representanteOriginal = representanteGerenciador.buscaPorId(representanteEditavelDTO.getId());
 		representanteGerenciador.atualiza(representanteOriginal, representanteEditavelDTO);
 
-		RepresentanteDTOResposta representante = new RepresentanteDTOResposta().transformaEmDTO(representanteOriginal);
+		return Response.status(Response.Status.OK).build();
+	}
+	
+	@GET
+	@Path("/buscar/{nomeRepresentante}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public RepresentanteIdEstDTOResposta buscaPorNome(@PathParam("nomeRepresentante") String nomeRepresentante) {
+		Representante representanteOriginalAuxiliar = representanteGerenciador.buscaPorNome(nomeRepresentante);
+		RepresentanteIdEstDTOResposta representante = new RepresentanteIdEstDTOResposta()
+				.transformaEmDTO(representanteOriginalAuxiliar);
 
 		return representante;
 	}

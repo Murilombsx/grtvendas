@@ -71,6 +71,10 @@ public class Cliente {
 		this.nomeFantasia = nomeFantasia;
 	}
 
+	public Cliente(Integer id) {
+		this.id = id;
+	}
+
 	public Set<Pedido> getPedidos() {
 		return pedidos;
 	}
