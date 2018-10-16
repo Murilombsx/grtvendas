@@ -1,1 +1,1 @@
-web:    java -cp target/dependency/*:target/classes Main
+web: java -jar target/java-getting-started-1.0.jar
